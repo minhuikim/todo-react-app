@@ -8,28 +8,35 @@ function App() {
   // deleteItem 추가 후 테스트를 위해 작성한 useState([...]) 배열을 빈 배열로 초기화
   const [items, setItems] = useState([]);
 
+  // 새로운 Todo 추가
   const addItem = (item) => {
-    item.id = "ID-" + items.length;  // key를 위한 id
+    item.id = "ID-" + items.length; // key를 위한 id
     item.done = false;              // done 초기화
 
     // 업데이트는 반드시 setItems로 하고 새 배열을 만들어야 한다.
     setItems([...items, item]);     // [...items] : 새 배열 추가
-    // console.log("items : ", items);
+    console.log("items : ", items);
   };
 
+  // Todo 수정
+  const editItem = () => {
+    setItems([...items]);
+  };
+
+  // Todo 삭제
   const deleteItem = (item) => {
     // 삭제할 아이템을 찾는다.
     const newItems = items.filter(e => e.id != item.id);
 
     // 삭제할 아이템을 제외한 아이템을 다시 배열에 저장한다.
     setItems([...newItems])
-  }
+  };
 
   let todoItems = items.length > 0 && (
     <Paper style={{margin: 16}}>
       <List>
         {items.map((item) => (
-          <Todo item={item} key={item.id} deleteItem={deleteItem} />
+          <Todo item={item} key={item.id} editItem={editItem} deleteItem={deleteItem} />
         ))}
       </List>
     </Paper>
