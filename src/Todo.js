@@ -26,7 +26,12 @@ const Todo = (props) => {
     const editEventHandler = (e) => {
         item.title = e.target.value;
         editItem();
-    }
+    };
+
+    const checkboxEventHandler = (e) => {
+        item.done = e.target.checked;
+        editItem();
+    };
 
     // 삭제기능
     const deleteEventHandler = () => {
@@ -35,7 +40,7 @@ const Todo = (props) => {
 
     return (
         <ListItem>
-            <Checkbox checked={item.done}/>
+            <Checkbox checked={item.done} onChange={checkboxEventHandler}/>
             <ListItemText>
                 <InputBase inputProps={{ "aria-label": "naked", readOnly: readOnly }} onClick={turnOffReadOnly} onKeyDown={turnOnReadOnly} onChange={editEventHandler}
                 type="text" id={item.id} name={item.id} value={item.title} multiline={true} fullWidth={true} />

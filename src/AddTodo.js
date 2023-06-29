@@ -29,7 +29,7 @@ const AddTodo = (props) => {
     // onInputChange 함수 TextField에 연력
     return (
         <Grid container style={{ marginTop: 20 }}>
-            <Grid sx={11} md={11} item style={{ paddingRight: 16 }}>
+            <Grid xs={11} md={11} item style={{ paddingRight: 16 }}>
                 <TextField placeholder="Add Todo here" fullWidth 
                     onChange={onInputChange} onKeyPress={enterKeyEventHandler} value={item.title}
                 />
