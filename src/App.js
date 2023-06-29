@@ -9,7 +9,7 @@ function App() {
   const [items, setItems] = useState([]);
 
   const addItem = (item) => {
-    item.id = "ID-" + item.length;  // key를 위한 id
+    item.id = "ID-" + items.length;  // key를 위한 id
     item.done = false;              // done 초기화
 
     // 업데이트는 반드시 setItems로 하고 새 배열을 만들어야 한다.
