@@ -17,20 +17,25 @@ const Todo = (props) => {
 
     // 수정완료 (읽기만 가능)
     const turnOnReadOnly = (e) => {
-        if (e.key == "Enter") {
+        // Todo항목 수정을 완료한 시점에 http 요청
+        if (e.key == "Enter" && readOnly == false) {
             setReadOnly(true);
+            editItem(item);
         }
     };
 
     // 내용 수정
     const editEventHandler = (e) => {
-        item.title = e.target.value;
-        editItem();
+        // 프론트에서 수정하는 Todo항목 item값을 업데이트하되, http요청은 안하도록 변경
+        // item.title = e.target.value;
+        // editItem();
+        
+        setItem({...item, title: e.target.value});
     };
 
     const checkboxEventHandler = (e) => {
         item.done = e.target.checked;
-        editItem();
+        editItem(item); // 체크 상태 변경 시 백엔드에 http 요청
     };
 
     // 삭제기능

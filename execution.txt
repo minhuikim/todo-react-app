@@ -1,0 +1,40 @@
+React-APP 초기화 및 실행
+
+# npm 프로젝트 초기화 - 작업폴더에 package.json 파일 생성
+(cmd)
+mkdir test-project
+cd test-project
+npm init
+description: test-project
+yes
+
+# workspace 생성
+(cmd)
+mkdir react-workspace
+cd react-workspace
+npx create-react-app todo-react-app
+y
+
+# 어플 실행 (D:\nodejs\react-workspace\todo-react-app)
+(cmd)
+cd nodejs\react-workspace\todo-react-app
+npm start
+(web - localhost:3000)
+
+# npm 설치
+(vscode)
+D:\nodejs\react-workspace\todo-react-app
+
+rm -rf node_modules
+rm package-lock.json
+
+npm install
+npm install @mui/material@5.6.0 @mui/icons-material@5.6.0
+npm install @emotion/react@11.9.0 @emotion/styled@11.8.1
+
+-----
+
+#Spring-Boot 실행 (D:\eclipswork\example1\demo)
+(cmd)
+cd eclipswork\example1\demo
+gradlew bootRun

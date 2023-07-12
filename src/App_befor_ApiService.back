@@ -1,9 +1,11 @@
+/**
+ * api-config.js, ApiService.js 추가 전 사용 페이지
+ */
 import "./App.css";
 import Todo from "./Todo";
 import React, { useEffect, useState } from "react";
 import { Container, List, Paper } from "@mui/material";
 import AddTodo from "./AddTodo";
-import { call } from "./service/ApiService";
 
 /*
   useEffect를 사용하지 않았을 때의 무한루프
@@ -18,27 +20,49 @@ function App() {
   // deleteItem 추가 후 테스트를 위해 작성한 useState([...]) 배열을 빈 배열로 초기화
   const [items, setItems] = useState([]);
 
+  // useEffect(콜백함수, 디펜던시 배열)를 사용해 무한루프를 방지하고 처음 리스트 호출
   useEffect(() => {
-    call("/todo", "GET", null)
-    .then((response) => setItems(response.data));
+    // todo API사용해 리스트 초기화
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+
+    // fetch : JSmethod, API서버로 http요청 송신, 수신 지원
+    fetch("http://localhost:8080/todo", requestOptions)
+    .then((response) => response.json())
+    .then(
+      (response) => {
+        setItems(response.data);
+      },
+      (error) => {
+
+      }
+    );
   }, [])
 
   // 새로운 Todo 추가
   const addItem = (item) => {
-    call("/todo", "POST", item)
-    .then((response) => setItems(response.data));
+    item.id = "ID-" + items.length; // key를 위한 id
+    item.done = false;              // done 초기화
+
+    // 업데이트는 반드시 setItems로 하고 새 배열을 만들어야 한다.
+    setItems([...items, item]);     // [...items] : 새 배열 추가
+    console.log("items : ", items);
   };
 
   // Todo 수정
-  const editItem = (item) => {
-    call("/todo", "PUT", item)
-    .then((response) => setItems(response.data));
+  const editItem = () => {
+    setItems([...items]);
   };
 
   // Todo 삭제
   const deleteItem = (item) => {
-    call("/todo", "DELETE", item)
-    .then((response) => setItems(response.data));
+    // 삭제할 아이템을 찾는다.
+    const newItems = items.filter(e => e.id != item.id);
+
+    // 삭제할 아이템을 제외한 아이템을 다시 배열에 저장한다.
+    setItems([...newItems])
   };
 
   let todoItems = items.length > 0 && (
@@ -59,4 +83,4 @@ function App() {
     </div>);
 }
 
-export default App;
+// export default App;
