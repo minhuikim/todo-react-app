@@ -16,9 +16,9 @@ export function call(api, method, request) {
         // GET method
         options.body = JSON.stringify(request);
     }
-    return fetch(options.url, options).then((responst) => {
-        if (responst.status == 200) {
-            return responst.json();
+    return fetch(options.url, options).then((response) => {
+        if (response.status == 200) {
+            return response.json();
         }
     }).catch((error) => {
         console.log("http error");
