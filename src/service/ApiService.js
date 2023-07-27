@@ -4,6 +4,7 @@
  */
 import { API_BASE_URL } from "../api-config";
 
+// call -> fetch -> (API 콜) -> then -> (HTTP 응답)
 export function call(api, method, request) {
     let options = {
         headers: new Headers({
@@ -16,9 +17,15 @@ export function call(api, method, request) {
         // GET method
         options.body = JSON.stringify(request);
     }
+    // 20230727 403에러 시 로그인 화면으로 redirect 추가 => sprint, npm start 후 / 경로로 들어가면 login페이지로 redirect됨
     return fetch(options.url, options).then((response) => {
         if (response.status == 200) {
             return response.json();
+        } else if(response.status == 403) {
+            window.location.href = "/login"; //redirect
+        } else {
+            Promise.reject(response);
+            throw Error(response);
         }
     }).catch((error) => {
         console.log("http error");

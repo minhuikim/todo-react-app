@@ -1,17 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client'
+import AppRouter from './AppRouter';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const container = document.getElementById('root');
+
+const root = createRoot(container);
+
+// 20230727 경로에 따라 실행되는 컴포넌트가 다르기 때문에 기존에 ReactDOM에 App컴포넌트를 넘겨주던 방식에서 
+// 정보를 가지고 있는 AppRouter를 먼저 렌더링하는 방식으로 변경
+// index.js -> AppRouter 컴포넌트 렌더링
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <AppRouter tab="home" />
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
