@@ -35,6 +35,16 @@ npm install react-router-dom@6.3.0
 
 -----
 
+<localStorage>
+- 브라우저 개발자도구 콘솔에 입력 시 확인 가능
+localStorage.setItem('hello', 'world')
+localStorage.getItem('hello')
+localStorage
+
+개발자도구 > Application > 로컬 스토리지 확인 가능
+
+-----
+
 #Spring-Boot 실행 (D:\eclipswork\example1\demo)
 (cmd)
 cd eclipswork\example1\demo

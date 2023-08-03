@@ -6,10 +6,19 @@ import { API_BASE_URL } from "../api-config";
 
 // call -> fetch -> (API 콜) -> then -> (HTTP 응답)
 export function call(api, method, request) {
+    let headers = new Headers({
+        "Content-Type": "application/json",
+    });
+
+    // 20230803 로컬 스토리지에서 ACCESS TOKEN 가져오기
+    // 액세스 토큰 헤더에 추가 : 로그인에 관련되지 않은 모든 API콜은 call 메서드를 통해 이루어지기 때문에 call에서 토큰이 존재하는 경우 헤더에 추가하는 로직 작성
+    const accessToken = localStorage.getItem("ACCESS_TOKEN");
+    if(accessToken && accessToken != null) {
+        headers.append("Authorization", "Bearer " + accessToken);
+    }
+
     let options = {
-        headers: new Headers({
-            "Content-Type": "application/json",
-        }),
+        headers: headers,
         url: API_BASE_URL + api,
         method: method,
     };
@@ -36,6 +45,9 @@ export function call(api, method, request) {
 export function signin(userDTO) {
     return call("/auth/signin", "POST", userDTO).then((response) => {
             if(response.token) {
+                // 20230803 로그인시 받은 토큰을 로컬스토리지에 저장
+                localStorage.setItem("ACCESS_TOKEN", response.token);
+                // console.log(localStorage);
                 // token이 존재하는 경우 Todo화면으로 redirect
                 window.location.href = "/";
             }
