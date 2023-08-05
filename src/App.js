@@ -1,9 +1,9 @@
 import "./App.css";
 import Todo from "./Todo";
 import React, { useEffect, useState } from "react";
-import { Container, List, Paper } from "@mui/material";
+import { Container, List, Paper, Grid, Button, AppBar, Toolbar, Typography } from "@mui/material";
 import AddTodo from "./AddTodo";
-import { call } from "./service/ApiService";
+import { call, signout } from "./service/ApiService";
 
 /*
   useEffect를 사용하지 않았을 때의 무한루프
@@ -51,12 +51,33 @@ function App() {
     </Paper>
   );
 
-  return (<div className="App">
+  // 20230805 navigationBar 추가
+  let navigationBar = (
+    <AppBar position="static">
+      <Toolbar>
+        <Grid justifyContent="space-between" container>
+          <Grid item>
+            <Typography variant="h6">오늘의 할일</Typography>
+          </Grid>
+          <Grid item>
+            <Button color="inherit" onClick={signout}>
+              로그아웃
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
+  );
+
+  return (
+    <div className="App">
+      {navigationBar} {/* 네비게이션 바 렌더링 */}
       <Container maxWidth="md">
         <AddTodo addItem={addItem} />
         <div className="TodoList">{todoItems}</div>
       </Container>
-    </div>);
+    </div>
+  );
 }
 
 export default App;
