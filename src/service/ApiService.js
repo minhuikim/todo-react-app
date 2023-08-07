@@ -54,6 +54,11 @@ export function signin(userDTO) {
         });
 }
 
+// 20230807 계정 생성 메서드 추가
+export function signup(userDTO) {
+    return call("/auth/signup", "POST", userDTO);
+}
+
 export function signout() {
     localStorage.setItem("ACCESS_TOKEN", null);
     window.location.href = "/login";

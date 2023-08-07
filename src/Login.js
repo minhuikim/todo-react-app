@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Grid, Typography, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import { signin } from "./service/ApiService";
 
 // Login 페이지 -> 로그인버튼 -> handleSubmit -> signin(ApiService)
+// 20230807 계정 생성 기능 추가
 const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -38,10 +40,15 @@ const Login = () => {
                             로그인
                         </Button>
                     </Grid>
+                    <Grid item>
+                        <Link to="/signup" variant="body2">
+                            계정이 없습니까? 여기서 가입하세요.
+                        </Link>
+                    </Grid>
                 </Grid>
             </form>
         </Container>
     );
-};
+}
 
 export default Login;
