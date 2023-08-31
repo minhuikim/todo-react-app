@@ -18,7 +18,7 @@ const Todo = (props) => {
     // 수정완료 (읽기만 가능)
     const turnOnReadOnly = (e) => {
         // Todo항목 수정을 완료한 시점에 http 요청
-        if (e.key == "Enter" && readOnly == false) {
+        if (e.key === "Enter" && readOnly === false) {
             setReadOnly(true);
             editItem(item);
         }

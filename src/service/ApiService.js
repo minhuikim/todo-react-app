@@ -28,9 +28,9 @@ export function call(api, method, request) {
     }
     // 20230727 403에러 시 로그인 화면으로 redirect 추가 => sprint, npm start 후 / 경로로 들어가면 login페이지로 redirect됨
     return fetch(options.url, options).then((response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
             return response.json();
-        } else if(response.status == 403) {
+        } else if(response.status === 403) {
             window.location.href = "/login"; //redirect
         } else {
             Promise.reject(response);
