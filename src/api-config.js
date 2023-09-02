@@ -12,7 +12,9 @@ if (hostname === "localhost") {
     backendHost = "http://localhost:8080";
 } else {
     // 일래스틱 빈스톡의 애플리케이션 URL
-    backendHost = "http://prod-todo-api-service-m.ap-northeast-2.elasticbeanstalk.com";
+    // backendHost = "http://prod-todo-api-service-m.ap-northeast-2.elasticbeanstalk.com";
+    // Backend 도메인 URL
+    backendHost = "https://api.minhsw.com";
 }
 
 export const API_BASE_URL = `${backendHost}`;
