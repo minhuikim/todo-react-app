@@ -63,3 +63,8 @@ export function signout() {
     localStorage.setItem("ACCESS_TOKEN", null);
     window.location.href = "/login";
 }
+
+// 20230903 socialLogin API 추가 (/auth/authorize/github로 브라우저 리다이렉트)
+export function socialLogin(provider) {
+    window.location.href = API_BASE_URL + "/auth/authorize" + provider;
+}

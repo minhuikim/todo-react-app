@@ -9,6 +9,7 @@ const hostname = window && window.location && window.location.hostname;
  * 20230830 Front-end 배포를 위해 backendHost 수정
  */
 if (hostname === "localhost") {
+    console.log("localhost");
     backendHost = "http://localhost:8080";
 } else {
     // 일래스틱 빈스톡의 애플리케이션 URL

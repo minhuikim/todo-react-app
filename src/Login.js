@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Grid, Typography, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { signin } from "./service/ApiService";
+import { signin, socialLogin } from "./service/ApiService";
 
 // Login 페이지 -> 로그인버튼 -> handleSubmit -> signin(ApiService)
 // 20230807 계정 생성 기능 추가
@@ -14,6 +14,11 @@ const Login = () => {
         // ApiService의 signin 메서드를 사용해 로그인
         signin({ username: username, password: password });
     };
+
+    // 20230903 소셜 로그인 함수 추가
+    const handleSocialLogin = (provider) => {
+        socialLogin(provider);
+    }
 
     // 로그인 화면
     return (
@@ -38,6 +43,12 @@ const Login = () => {
                     <Grid item xs={12}>
                         <Button type="submit" fullWidth variant="contained" color="primary">
                             로그인
+                        </Button>
+                    </Grid>
+                    {/** 20230903 소셜 로그인 버튼 추가 */}
+                    <Grid item xs={12}>
+                        <Button onClick={() => handleSocialLogin("github")} fullWidth variant="contained" style={{backgroundColor: '#000'}}>
+                            깃허브로 로그인하기
                         </Button>
                     </Grid>
                     <Grid item>
